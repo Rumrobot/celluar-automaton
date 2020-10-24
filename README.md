@@ -1,2 +1,2 @@
 # celluar-automaton
-Celluar Automatum
+Celluar Automaton
