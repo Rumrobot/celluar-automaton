@@ -1,8 +1,8 @@
 (function(){
-    const rowsnum = 9;    
-    const colsnum = 9;
+    const rowsnum = 30;    
+    const colsnum = 30;
     const cellSize = 20;
-    const initConfig = ["2:2", "4:7", "7:4", "5:5", "3:8", "8:7", "8:8", "9:2"];
+    const initConfig = ["7:8", "9:8", "9:9", "8:9", "8:10"];
 
     var t = 0;
 
@@ -93,7 +93,7 @@
         //part 1 - Computing
         for (let i = 2; i <= rowsnum - 1; i++)
         {
-            for (let j = 2; j = colsnum - 1; j++)
+            for (let j = 2; j <= colsnum - 1; j++)
             {
                 let cell = get(i, j);
 
@@ -114,9 +114,10 @@
         //part 2 - Applying
         for (let i = 2; i <= rowsnum - 1; i++)
         {
-            for (let j = 2; j = colsnum - 1; j++)
+            for (let j = 2; j <= colsnum - 1; j++)
             {
-                
+                set(i, j, getTmp(i, j));
+                removeTmpValue(i, j);
             }
         }
 
@@ -134,7 +135,12 @@
     function setTmp(i, j, value)
     {
         let cell = getCell(i, j);
-        cell.setAttribute("data-value", value);
+        cell.setAttribute("data-tmpvalue", value);
+    }
+
+    function removeTmpValue (i, j) {
+        let cell = getCell(i, j);
+        cell.removeAttribute("data-tmpvalue");
     }
 
     function getTmp(i, j)
@@ -161,6 +167,7 @@
         {
             return 1;
         }
+        return state;
     }
 
     window.addEventListener("load", function()
