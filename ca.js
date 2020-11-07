@@ -73,7 +73,18 @@
         holder.addEventListener("click", function(){
             t++;
             updateCycleText();
-            console.log("Hi");
+        });
+    }
+
+    function backwardsButton()
+    {
+        let holder = document.getElementById("backwards-button");
+        holder.addEventListener("click", function(){
+            if (t > 0)
+            {
+                t--;
+                updateCycleText();
+            }
         });
     }
 
@@ -83,5 +94,6 @@
         initializeGrid();
         updateCycleText();
         forwardButton();
+        backwardsButton();
     });
 })();
