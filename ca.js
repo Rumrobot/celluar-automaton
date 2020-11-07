@@ -71,7 +71,7 @@
     {
         let holder = document.getElementById("forward-button");
         holder.addEventListener("click", function(){
-            t++;
+            next();
             updateCycleText();
         });
     }
@@ -86,6 +86,81 @@
                 updateCycleText();
             }
         });
+    }
+
+    function next()
+    {
+        //part 1 - Computing
+        for (let i = 2; i <= rowsnum - 1; i++)
+        {
+            for (let j = 2; j = colsnum - 1; j++)
+            {
+                let cell = get(i, j);
+
+                let north = get(i - 1, j);
+                let south = get(i + 1, j);
+                let east = get(i, j + 1);
+                let west = get(i, j - 1);
+                let northeast = get(i - 1, j + 1);
+                let southeast = get(i + 1, j + 1);
+                let northwest = get(i - 1, j - 1);
+                let southwest = get(i + 1, j - 1);
+                let neighSum = north + south + east + west + northeast + southeast + northwest + southwest;
+
+                setTmp(i, j, calculateState(cell, neighSum));   
+            }
+        }
+
+        //part 2 - Applying
+        for (let i = 2; i <= rowsnum - 1; i++)
+        {
+            for (let j = 2; j = colsnum - 1; j++)
+            {
+                
+            }
+        }
+
+        //part 3 - Updating variable
+        t++;
+    }
+
+    function get(i, j)
+    {
+        let cell = getCell(i, j);
+        let value = cell.getAttribute("data-value") || 0;
+        return parseInt(value);
+    }
+
+    function setTmp(i, j, value)
+    {
+        let cell = getCell(i, j);
+        cell.setAttribute("data-value", value);
+    }
+
+    function getTmp(i, j)
+    {
+        let cell = getCell(i, j);
+        return parseInt(cell.getAttribute("data-tmpvalue"));
+    }
+
+    function calculateState(state, neighSum)
+    {
+        if (state === 1 && neighSum < 2)
+        {
+            return 0;
+        }
+        if (state === 1 && neighSum >= 2 && neighSum <= 3)
+        {
+            return 1;
+        }
+        if (state === 1 && neighSum > 3)
+        {
+            return 0;
+        }
+        if (state === 0 && neighSum === 3)
+        {
+            return 1;
+        }
     }
 
     window.addEventListener("load", function()
