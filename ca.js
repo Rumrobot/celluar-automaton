@@ -1,8 +1,8 @@
 (function(){
     const rowsnum = 30;    
     const colsnum = 30;
-    const cellSize = 20;
-    const initConfig = ["7:8", "9:8", "9:9", "8:9", "8:10"];
+    const cellSize = 10;
+    const initConfig = ["6:5", "6:6", "7:6", "7:5", "7:7", "8:4", "8:6", "8:7", "9:4", "9:5", "9:6", "10:5"];
 
     var t = 0;
 
