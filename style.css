@@ -52,7 +52,8 @@ body
     top: 0;
 }
 
-#static-top a {
+#static-top a 
+{
     float: left;
     display: block;
     color: #f2f2f2;
@@ -62,8 +63,19 @@ body
     font-size: 17px;
 }
 
-#static-top a:hover {
+#static-top a:hover 
+{
     background: #ddd;
     color: black;
 }
-  
+
+#static-top #cycleText:hover
+{
+    background: transparent;
+    color: #f2f2f2;
+}
+
+#cycleText
+{
+    cursor: progress;
+}

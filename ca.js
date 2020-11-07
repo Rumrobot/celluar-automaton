@@ -2,7 +2,9 @@
     const rowsnum = 9;    
     const colsnum = 9;
     const cellSize = 20;
-    const initConfig = ["2:2", "4:7", "7:4", "5:5", "3:8", "8:7", "8:8"];
+    const initConfig = ["2:2", "4:7", "7:4", "5:5", "3:8", "8:7", "8:8", "9:2"];
+
+    var t = 0;
 
     function create() 
     {
@@ -43,6 +45,12 @@
         }
     }
 
+    function updateCycleText()
+    {
+        var text = document.getElementById("cycleText");
+        text.textContent = "cycle " + t;
+    }
+
     function set(i, j, value)
     {
         let cell = getCell(i, j);
@@ -59,9 +67,21 @@
         return document.getElementById("ca");
     }
 
+    function forwardButton()
+    {
+        let holder = document.getElementById("forward-button");
+        holder.addEventListener("click", function(){
+            t++;
+            updateCycleText();
+            console.log("Hi");
+        });
+    }
+
     window.addEventListener("load", function()
     {
         create();
         initializeGrid();
+        updateCycleText();
+        forwardButton();
     });
 })();
