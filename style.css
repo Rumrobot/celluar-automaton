@@ -79,3 +79,47 @@ body
 {
     cursor: progress;
 }
+
+#play-button
+{
+    width: 25px;
+    height: 25px;
+}
+
+#pause-button
+{
+    width: 25px;
+    height: 25px;
+}
+
+#play-button img
+{
+    width: 25px;
+    height: 25px;
+
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+}
+
+#pause-button img
+{
+    width: 25px;
+    height: 25px;
+
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(118%) contrast(119%);
+}
+
+#pause-button:hover img
+{
+    width: 25px;
+    height: 25px;
+
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(50%) contrast(119%);
+}
+
+#play-button:hover img
+{
+    width: 25px;
+    height: 25px;
+
+    filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(50%) contrast(119%);
+}

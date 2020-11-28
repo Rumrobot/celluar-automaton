@@ -1,8 +1,11 @@
 (function(){
     const rowsnum = 30;    
     const colsnum = 30;
-    const cellSize = 10;
+    const cellSize = 20;
     const initConfig = [];
+
+    let timer;
+    let speed = 500;
 
     let t = 0;
 
@@ -195,6 +198,28 @@
         }
     }
 
+    function initializePlayControls()
+    {
+        let playButton = document.getElementById("play-button");
+        playButton.addEventListener("click", function(){
+            if (timer > 0)
+            {
+                return;
+            }
+
+            timer = window.setInterval(function(){
+                next();
+                updateCycleText();
+            }, speed);
+        });
+        
+        let pauseButton = document.getElementById("pause-button");
+        pauseButton.addEventListener("click", function(){
+            window.clearInterval(timer);
+            timer = 0;
+        });
+    }
+
     window.addEventListener("load", function()
     {
         create();
@@ -203,5 +228,6 @@
         updateCycleText();
         forwardButton();
         backwardsButton();
+        initializePlayControls();
     });
 })();
