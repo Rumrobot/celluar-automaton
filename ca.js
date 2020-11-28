@@ -2,21 +2,21 @@
     const rowsnum = 30;    
     const colsnum = 30;
     const cellSize = 10;
-    const initConfig = ["6:5", "6:6", "7:6", "7:5", "7:7", "8:4", "8:6", "8:7", "9:4", "9:5", "9:6", "10:5"];
+    const initConfig = [];
 
-    var t = 0;
+    let t = 0;
 
     function create() 
     {
-        var container = getContainer();
+        let container = getContainer();
 
         container.style.width = (colsnum * cellSize + colsnum) + "px";
 
-        for (var i = 1; i <= rowsnum; i++) 
+        for (let i = 1; i <= rowsnum; i++) 
         {
-            for (var j = 1; j <= colsnum; j++)
+            for (let j = 1; j <= colsnum; j++)
             {
-                var cell = document.createElement("div");
+                let cell = document.createElement("div");
                 cell.id = i + ":" + j;
                 cell.classList.add("cell");
                 cell.style.width = cellSize + "px";
@@ -47,7 +47,7 @@
 
     function updateCycleText()
     {
-        var text = document.getElementById("cycleText");
+        let text = document.getElementById("cycleText");
         text.textContent = "cycle " + t;
     }
 
@@ -125,6 +125,12 @@
         t++;
     }
 
+    /**
+     * The GET function is returning the current state of the cell.
+     * @param {*} i The row.
+     * @param {*} j The column.
+     * @returns 0 or 1.
+     */
     function get(i, j)
     {
         let cell = getCell(i, j);
@@ -170,9 +176,29 @@
         return state;
     }
 
+    function initializeCells()
+    {
+        for (let i = 1; i <= rowsnum; i++) 
+        {
+            for (let j = 1; j <= colsnum; j++)
+            {
+                let cell = getCell(i, j);
+                cell.addEventListener("click", function(){
+                    if (get(i, j) === 1)
+                    {
+                        set(i, j, 0);
+                    } else {
+                        set(i, j, 1);
+                    }
+                });
+            }
+        }
+    }
+
     window.addEventListener("load", function()
     {
         create();
+        initializeCells();
         initializeGrid();
         updateCycleText();
         forwardButton();
