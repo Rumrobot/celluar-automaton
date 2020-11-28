@@ -123,3 +123,12 @@ body
 
     filter: invert(48%) sepia(79%) saturate(2476%) hue-rotate(86deg) brightness(50%) contrast(119%);
 }
+
+#static-top.show-play #pause-button 
+{
+    display: none;
+}
+#static-top.show-pause #play-button 
+{
+    display: none;
+}

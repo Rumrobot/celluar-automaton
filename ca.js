@@ -211,12 +211,18 @@
                 next();
                 updateCycleText();
             }, speed);
+
+            let statictop = document.getElementById("static-top");
+            statictop.className = "show-pause";
         });
         
         let pauseButton = document.getElementById("pause-button");
         pauseButton.addEventListener("click", function(){
             window.clearInterval(timer);
             timer = 0;
+
+            let statictop = document.getElementById("static-top");
+            statictop.className = "show-play"
         });
     }
 
