@@ -126,6 +126,8 @@
 
         //part 3 - Updating variable
         t++;
+
+        updateActiveCells();
     }
 
     /**
@@ -190,8 +192,11 @@
                     if (get(i, j) === 1)
                     {
                         set(i, j, 0);
+                        updateActiveCells();
+                        
                     } else {
                         set(i, j, 1);
+                        updateActiveCells();
                     }
                 });
             }
@@ -226,6 +231,25 @@
         });
     }
 
+    function updateActiveCells()
+    {
+        let activeCells = 0;
+
+        for (let i = 1; i <= rowsnum; i++) 
+        {
+            for (let j = 1; j <= colsnum; j++)
+            {
+                if (get(i, j) === 1)
+                {
+                    activeCells++;
+                }
+            }
+        } 
+
+        let text = document.getElementById("active-cells");
+        text.textContent = "Active Cells: " + activeCells;
+    }
+
     window.addEventListener("load", function()
     {
         create();
@@ -235,5 +259,6 @@
         forwardButton();
         backwardsButton();
         initializePlayControls();
+        updateActiveCells();
     });
 })();
