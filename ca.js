@@ -1,22 +1,25 @@
 (function(){
     const rowsnum = 30;    
     const colsnum = 30;
-    const cellSize = 10;
-    const initConfig = ["6:5", "6:6", "7:6", "7:5", "7:7", "8:4", "8:6", "8:7", "9:4", "9:5", "9:6", "10:5"];
+    const cellSize = 20;
+    const initConfig = [];
 
-    var t = 0;
+    let timer;
+    let speed = 500;
+
+    let t = 0;
 
     function create() 
     {
-        var container = getContainer();
+        let container = getContainer();
 
         container.style.width = (colsnum * cellSize + colsnum) + "px";
 
-        for (var i = 1; i <= rowsnum; i++) 
+        for (let i = 1; i <= rowsnum; i++) 
         {
-            for (var j = 1; j <= colsnum; j++)
+            for (let j = 1; j <= colsnum; j++)
             {
-                var cell = document.createElement("div");
+                let cell = document.createElement("div");
                 cell.id = i + ":" + j;
                 cell.classList.add("cell");
                 cell.style.width = cellSize + "px";
@@ -47,7 +50,7 @@
 
     function updateCycleText()
     {
-        var text = document.getElementById("cycleText");
+        let text = document.getElementById("cycleText");
         text.textContent = "cycle " + t;
     }
 
@@ -123,8 +126,16 @@
 
         //part 3 - Updating variable
         t++;
+
+        updateActiveCells();
     }
 
+    /**
+     * The GET function is returning the current state of the cell.
+     * @param {*} i The row.
+     * @param {*} j The column.
+     * @returns 0 or 1.
+     */
     function get(i, j)
     {
         let cell = getCell(i, j);
@@ -170,12 +181,84 @@
         return state;
     }
 
+    function initializeCells()
+    {
+        for (let i = 1; i <= rowsnum; i++) 
+        {
+            for (let j = 1; j <= colsnum; j++)
+            {
+                let cell = getCell(i, j);
+                cell.addEventListener("click", function(){
+                    if (get(i, j) === 1)
+                    {
+                        set(i, j, 0);
+                        updateActiveCells();
+                        
+                    } else {
+                        set(i, j, 1);
+                        updateActiveCells();
+                    }
+                });
+            }
+        }
+    }
+
+    function initializePlayControls()
+    {
+        let playButton = document.getElementById("play-button");
+        playButton.addEventListener("click", function(){
+            if (timer > 0)
+            {
+                return;
+            }
+
+            timer = window.setInterval(function(){
+                next();
+                updateCycleText();
+            }, speed);
+
+            let statictop = document.getElementById("static-top");
+            statictop.className = "show-pause";
+        });
+        
+        let pauseButton = document.getElementById("pause-button");
+        pauseButton.addEventListener("click", function(){
+            window.clearInterval(timer);
+            timer = 0;
+
+            let statictop = document.getElementById("static-top");
+            statictop.className = "show-play"
+        });
+    }
+
+    function updateActiveCells()
+    {
+        let activeCells = 0;
+
+        for (let i = 1; i <= rowsnum; i++) 
+        {
+            for (let j = 1; j <= colsnum; j++)
+            {
+                if (get(i, j) === 1)
+                {
+                    activeCells++;
+                }
+            }
+        } 
+
+        let text = document.getElementById("active-cells");
+        text.textContent = "Active Cells: " + activeCells;
+    }
+
     window.addEventListener("load", function()
     {
         create();
+        initializeCells();
         initializeGrid();
         updateCycleText();
         forwardButton();
         backwardsButton();
+        initializePlayControls();
+        updateActiveCells();
     });
 })();
