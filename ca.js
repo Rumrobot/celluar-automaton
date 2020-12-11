@@ -249,6 +249,8 @@
 
         let text = document.getElementById("active-cells");
         text.textContent = "Active Cells: " + activeCells;
+
+        addDataToChart(activeCells, t);
     }
 
     function displayChart() 
@@ -260,15 +262,35 @@
             data: {
                 labels: ["Active Cells History"],
                 datasets: [{
-                    label: "of Votes",
-                    data: []
-                }]
+                    label: "is how many times the chart has been updated",
+                    data: [],
+                    backgroundColor: [
+                        "rgba(225,0,0, 0.2)"
+                    ] 
+                 }]
             },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
         });
+    }
+
+    function addDataToChart(value, label)
+    {
+        chart.data.labels.push(label);
+        chart.data.datasets[0].data.push(value);
+        chart.update();
     }
 
     window.addEventListener("load", function()
     {
+        displayChart();
         create();
         initializeCells();
         initializeGrid();
@@ -277,6 +299,6 @@
         backwardsButton();
         initializePlayControls();
         updateActiveCells();
-        displayChart();
+        
     });
 })();
