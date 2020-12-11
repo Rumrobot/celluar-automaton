@@ -8,6 +8,7 @@
     let speed = 500;
 
     let t = 0;
+    let chart;
 
     function create() 
     {
@@ -250,6 +251,22 @@
         text.textContent = "Active Cells: " + activeCells;
     }
 
+    function displayChart() 
+    {
+        var ctx = document.getElementById("chart");
+
+        chart = new Chart(ctx, {
+            type: "line",
+            data: {
+                labels: ["Active Cells History"],
+                datasets: [{
+                    label: "of Votes",
+                    data: []
+                }]
+            },
+        });
+    }
+
     window.addEventListener("load", function()
     {
         create();
@@ -260,5 +277,6 @@
         backwardsButton();
         initializePlayControls();
         updateActiveCells();
+        displayChart();
     });
 })();
