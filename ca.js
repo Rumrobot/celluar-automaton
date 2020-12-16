@@ -84,14 +84,14 @@
             {
                 let cell = get(i, j);
 
-                let north = get(i - 1, j);
-                let south = get(i + 1, j);
-                let east = get(i, j + 1);
-                let west = get(i, j - 1);
-                let northeast = get(i - 1, j + 1);
-                let southeast = get(i + 1, j + 1);
-                let northwest = get(i - 1, j - 1);
-                let southwest = get(i + 1, j - 1);
+                let north = isInfected(i - 1, j);
+                let south = isInfected(i + 1, j);
+                let east = isInfected(i, j + 1);
+                let west = isInfected(i, j - 1);
+                let northeast = isInfected(i - 1, j + 1);
+                let southeast = isInfected(i + 1, j + 1);
+                let northwest = isInfected(i - 1, j - 1);
+                let southwest = isInfected(i + 1, j - 1);
                 let neighSum = north + south + east + west + northeast + southeast + northwest + southwest;
 
                 setTmp(i, j, calculateState(cell, neighSum));   
@@ -123,8 +123,20 @@
     function get(i, j)
     {
         let cell = getCell(i, j);
-        let value = cell.getAttribute("data-value") || 0;
+        let value = cell.getAttribute("data-value") || -1;
         return parseInt(value);
+    }
+  
+    function isInfected(i, j)
+    {
+        let dataValue = get(i, j);
+
+        if (dataValue >= 1)
+        {
+            return 1;
+        } else{
+            return 0;
+        }
     }
 
     function setTmp(i, j, value)
@@ -146,16 +158,16 @@
 
     function calculateState(state, neighSum)
     {
-        if (state === 0 && neighSum >= 1)
+        if (state >= 1)
         {
-            return 1;
-        } else {
-            if (state === 1)
-            {
-                return 1;
-            }
+            return state-1;
+        }else if (0){
             return 0;
-        } 
+        }else {
+            //This is where we calculate the probability of getting infected from the neighbors.
+
+            
+        }
    
     }
 
