@@ -2,12 +2,12 @@
     const rowsnum = 30;    
     const colsnum = 30;
     const cellSize = 20;
-    const initConfig = [];
 
     let timer;
     let speed = 500;
 
     let t = 0;
+    let p = 0.5682;
     let chart;
 
     function create() 
@@ -23,28 +23,11 @@
                 let cell = document.createElement("div");
                 cell.id = i + ":" + j;
                 cell.classList.add("cell");
+                //cell.
                 cell.style.width = cellSize + "px";
                 cell.style.height = cellSize + "px";
 
                 container.appendChild(cell);
-            }
-        }
-    }
-
-    function initializeGrid()
-    {
-        for (let i = 1; i <= rowsnum; i++)
-        {
-            for (let j = 1; j <= colsnum; j++)
-            {
-                if (initConfig.indexOf(i + ":" + j) >= 0)
-                {
-                    set(i, j, 1);
-                } 
-                else
-                {
-                    set(i, j, 0);    
-                }
             }
         }
     }
@@ -163,23 +146,17 @@
 
     function calculateState(state, neighSum)
     {
-        if (state === 1 && neighSum < 2)
-        {
-            return 0;
-        }
-        if (state === 1 && neighSum >= 2 && neighSum <= 3)
+        if (state === 0 && neighSum >= 1)
         {
             return 1;
-        }
-        if (state === 1 && neighSum > 3)
-        {
+        } else {
+            if (state === 1)
+            {
+                return 1;
+            }
             return 0;
-        }
-        if (state === 0 && neighSum === 3)
-        {
-            return 1;
-        }
-        return state;
+        } 
+   
     }
 
     function initializeCells()
@@ -293,7 +270,6 @@
         displayChart();
         create();
         initializeCells();
-        initializeGrid();
         updateCycleText();
         forwardButton();
         backwardsButton();
