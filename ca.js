@@ -160,8 +160,10 @@
     {
         if (state >= 1)
         {
+            console.log("State transision: ", state, "-->", state-1);
             return state-1;
-        }else if (0){
+        }else if (state === 0){
+            console.log("State transision: ", state, "-->", 0);
             return 0;
         }else {
             //This is where we calculate the probability of getting infected from the neighbors.
@@ -174,10 +176,11 @@
                 {
                    //We continue to the next one
                 } else {
+                    console.log("State transision: ", state, "-->", 11);
                     return 11;
                 }
             }
-
+            console.log("State transision: ", state, "-->", -1);
             return -1;                                    
           
         }
@@ -242,7 +245,7 @@
         {
             for (let j = 1; j <= colsnum; j++)
             {
-                if (get(i, j) === 1)
+                if (isInfected(i, j) === 1)
                 {
                     activeCells++;
                 }
