@@ -7,7 +7,7 @@
     let speed = 500;
 
     let t = 0;
-    let p = 0.5682;
+    let p = 75; //The percentage probalbility of getting infected (0.5682)
     let chart;
 
     function create() 
@@ -166,7 +166,20 @@
         }else {
             //This is where we calculate the probability of getting infected from the neighbors.
 
-            
+            for (let x=0; x<neighSum; x++)
+            {
+                let randomNumber = 100*Math.random();
+
+                if (randomNumber > p)
+                {
+                   //We continue to the next one
+                } else {
+                    return 11;
+                }
+            }
+
+            return -1;                                    
+          
         }
    
     }
@@ -181,11 +194,11 @@
                 cell.addEventListener("click", function(){
                     if (get(i, j) === 1)
                     {
-                        set(i, j, 0);
+                        set(i, j, -1);
                         updateActiveCells();
                         
                     } else {
-                        set(i, j, 1);
+                        set(i, j, 11);
                         updateActiveCells();
                     }
                 });
