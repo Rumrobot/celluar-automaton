@@ -7,7 +7,7 @@
     let speed = 500;
 
     let t = 0;
-    let p = 75; //The percentage probalbility of getting infected (0.5682)
+    let p = 21.34; //The percentage probalbility of getting infected (0.5682)
     let chart;
 
     function create() 
@@ -176,8 +176,8 @@
                 {
                    //We continue to the next one
                 } else {
-                    console.log("State transision: ", state, "-->", 11);
-                    return 11;
+                    console.log("State transision: ", state, "-->", 21);
+                    return 21;
                 }
             }
             console.log("State transision: ", state, "-->", -1);
@@ -201,7 +201,7 @@
                         updateActiveCells();
                         
                     } else {
-                        set(i, j, 11);
+                        set(i, j, 21);
                         updateActiveCells();
                     }
                 });

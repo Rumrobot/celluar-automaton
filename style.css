@@ -35,7 +35,17 @@ body
 .cell[data-value = "8"],
 .cell[data-value = "9"],
 .cell[data-value = "10"],
-.cell[data-value = "11"]
+.cell[data-value = "11"],
+.cell[data-value = "12"],
+.cell[data-value = "13"],
+.cell[data-value = "14"],
+.cell[data-value = "15"],
+.cell[data-value = "16"],
+.cell[data-value = "17"],
+.cell[data-value = "18"],
+.cell[data-value = "19"],
+.cell[data-value = "20"],
+.cell[data-value = "21"]
 {
     background-image: url("pictures/covid-19.png");
     background-position-x: center;
